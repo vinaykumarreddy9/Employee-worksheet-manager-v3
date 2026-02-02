@@ -1,0 +1,15 @@
+fastapi
+uvicorn
+gunicorn
+sqlalchemy[asyncio]
+asyncpg
+pydantic[email]
+pydantic-settings
+python-dotenv
+passlib[bcrypt]
+bcrypt
+python-multipart
+pytest
+pytest-asyncio
+httpx
+anyio

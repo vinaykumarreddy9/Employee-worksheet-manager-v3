@@ -1,0 +1,145 @@
+.auth-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 1rem;
+  background-color: var(--bg-main);
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 440px;
+  padding: 4rem 3rem;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  background: white;
+  display: flex;
+  flex-direction: column;
+  animation: fadeIn 0.4s ease-out;
+}
+
+.auth-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.auth-logo {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.main-logo {
+  width: 110px;
+  height: 110px;
+  background: #fdfdfd;
+  border-radius: 50%;
+  padding: 4px;
+  object-fit: cover;
+  border: 1px solid #edf2f7;
+}
+
+.auth-header h1 {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 0.5rem;
+}
+
+.auth-header p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  font-weight: 500;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group label {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--text-body);
+  text-align: left;
+}
+
+.form-group input {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: var(--radius-sm);
+  padding: 0.75rem 1rem;
+  color: var(--text-body);
+}
+
+.form-group input::placeholder {
+  color: #cbd5e0;
+}
+
+.primary-btn {
+  background-color: var(--primary);
+  color: white;
+  padding: 0.875rem;
+  font-size: 1rem;
+  font-weight: 700;
+  border-radius: var(--radius-sm);
+  margin-top: 1rem;
+  box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.2);
+}
+
+.primary-btn:hover {
+  background-color: var(--primary-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 10px -1px rgba(59, 130, 246, 0.3);
+}
+
+.primary-btn:active {
+  transform: translateY(0);
+}
+
+.auth-footer {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.text-btn {
+  background: none;
+  color: var(--text-link);
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.text-btn:hover {
+  text-decoration: underline;
+}
+
+.error-message {
+  color: #e53e3e;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  background-color: #fff5f5;
+  padding: 0.75rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid #fed7d7;
+  margin-top: 0.5rem;
+}
+
+/* Success/Signup Screen consistency */
+.success-screen {
+  text-align: center;
+  padding: 2rem 0;
+}
+
+.success-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
