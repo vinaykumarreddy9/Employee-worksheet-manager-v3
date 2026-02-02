@@ -9,8 +9,8 @@
 
 .auth-card {
   width: 100%;
-  max-width: 440px;
-  padding: 4rem 3rem;
+  max-width: 520px;
+  padding: 2.5rem 3rem; /* Reduced padding */
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-lg);
   background: white;
@@ -21,13 +21,13 @@
 
 .auth-header {
   text-align: center;
-  margin-bottom: 2.5rem;
+  margin-bottom: 1.5rem; /* Reduced from 2.5rem */
 }
 
 .auth-logo {
   display: flex;
   justify-content: center;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1rem; /* Reduced from 1.5rem */
 }
 
 .main-logo {
@@ -56,7 +56,7 @@
 .auth-form {
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 1rem; /* Reduced from 1.25rem */
 }
 
 .form-group {
@@ -91,7 +91,7 @@
   font-size: 1rem;
   font-weight: 700;
   border-radius: var(--radius-sm);
-  margin-top: 1rem;
+  margin-top: 0.5rem; /* Reduced from 1rem */
   box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.2);
 }
 
@@ -106,7 +106,7 @@
 }
 
 .auth-footer {
-  margin-top: 2rem;
+  margin-top: 1.5rem; /* Reduced from 2rem */
   text-align: center;
 }
 
