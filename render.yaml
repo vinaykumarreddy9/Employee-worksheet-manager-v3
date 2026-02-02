@@ -22,7 +22,7 @@ services:
     buildCommand: cd frontend && npm install && npm run build
     startCommand: cd frontend && npx serve -s dist -l $PORT
     envVars:
-      - key: API_URL
+      - key: VITE_API_URL
         value: https://timesheet-api-uw49.onrender.com
       - key: PYTHON_VERSION
         value: 3.11.0
