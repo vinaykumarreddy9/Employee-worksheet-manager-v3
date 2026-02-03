@@ -99,7 +99,7 @@ export const AdminDashboard = () => {
   return (
     <div className="admin-dashboard animate-in">
       <div className="dashboard-header">
-        <h2>Admin Review Dashboard</h2>
+        <h2>Admin Dashboard</h2>
       </div>
 
       {error && <div className="error-message">{error}</div>}
@@ -110,7 +110,7 @@ export const AdminDashboard = () => {
         </div>
       ) : (
         <div className="submissions-list">
-          <h3>Pending Reviews ({submissions.length})</h3>
+          <h3>Pending Approvals ({submissions.length})</h3>
           
           {submissions.map((sub) => {
             const id = `${sub.email}_${sub.week_start_date}`;
