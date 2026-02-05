@@ -12,7 +12,7 @@ export const Sidebar = () => {
     <div className="sidebar">
       <div className="sidebar-branding">
         <div className="sidebar-logo-circle">
-          <Share2 size={32} strokeWidth={2.5} />
+          <img src="/logo.jpg" alt="Logo" className="sidebar-logo-img" />
         </div>
         <div className="company-name">Digiotai Solutions</div>
       </div>

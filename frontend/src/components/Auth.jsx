@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import './Auth.css';
-import logo from '../assets/logo.jpg';
+const logo = '/logo.jpg';
 
 export const Login = ({ onSwitch }) => {
   const [email, setEmail] = useState('');

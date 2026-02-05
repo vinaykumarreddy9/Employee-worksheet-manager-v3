@@ -33,11 +33,12 @@
 .main-logo {
   width: 110px;
   height: 110px;
-  background: #fdfdfd;
+  object-fit: contain;
   border-radius: 50%;
-  padding: 12px;
-  object-fit: cover;
   border: 1px solid #edf2f7;
+  overflow: hidden;
+  background: white;
+  padding: 0px; /* Added padding for better alignment */
 }
 
 .auth-header h1 {
