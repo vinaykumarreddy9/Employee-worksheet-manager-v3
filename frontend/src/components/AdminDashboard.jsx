@@ -111,13 +111,7 @@ export const AdminDashboard = () => {
       {/* Top Portal Banner */}
       <div className="admin-portal-nav">
         <div className="portal-info">
-          <div className="portal-logo">
-            <img src="/logo.jpg" alt="Logo" className="portal-logo-img" />
-          </div>
-          <div className="portal-text">
-            <span className="portal-label">ADMIN PORTAL</span>
-            <h1 className="portal-title">Digiotai Solutions</h1>
-          </div>
+          <h1 className="portal-title">Admin Dashboard</h1>
         </div>
         <div className="portal-tabs">
           <button 
@@ -139,7 +133,6 @@ export const AdminDashboard = () => {
         {activeTab === 'Dashboard' ? (
           <>
             <div className="dashboard-main-header">
-              <h2 className="page-title">Admin Dashboard</h2>
               <div className="stats-row">
                 <div className="stat-pill stats-total">
                   Total: {stats.total} submissions
