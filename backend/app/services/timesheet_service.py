@@ -29,7 +29,6 @@ class TimesheetService:
                     week_start_date=data.week_start_date,
                     date=entry.date,
                     hours=entry.hours,
-                    project_name=entry.project_name,
                     task_description=entry.task_description,
                     status=status,
                     work_type=entry.work_type

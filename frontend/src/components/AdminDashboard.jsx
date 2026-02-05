@@ -4,6 +4,7 @@ import apiService from '../services/apiService';
 import './Admin.css';
 import { Check, X, ChevronRight, ChevronDown, MessageSquare, Calendar } from 'lucide-react';
 import { formatDisplayDate } from '../utils/dateUtils';
+import AdminReports from './AdminReports';
 
 export const AdminDashboard = () => {
   const getInitials = (name) => name ? name.charAt(0).toUpperCase() : '?';
@@ -16,6 +17,8 @@ export const AdminDashboard = () => {
   const [approveModal, setApproveModal] = useState(null); // Stores submission object to approve
   const [rejectModal, setRejectModal] = useState(null);   // Stores submission object to reject
   const [rejectReasonText, setRejectReasonText] = useState('');
+  const [activeTab, setActiveTab] = useState('Dashboard');
+  const [stats, setStats] = useState({ pending: 0, total: 0 });
 
   useEffect(() => {
     fetchSubmissions();
@@ -24,8 +27,15 @@ export const AdminDashboard = () => {
   const fetchSubmissions = async () => {
     setLoading(true);
     try {
-      const data = await apiService.get('/admin/submitted-weeks');
+      const [data, statsData] = await Promise.all([
+        apiService.get('/admin/submitted-weeks'),
+        apiService.get('/admin/stats')
+      ]);
       setSubmissions(data || []);
+      setStats({
+        pending: statsData.pending || 0,
+        total: statsData.total || 0
+      });
     } catch {
       setError('Failed to fetch submitted weeks.');
     } finally {
@@ -98,48 +108,91 @@ export const AdminDashboard = () => {
 
   return (
     <div className="admin-dashboard animate-in">
-      <div className="dashboard-header">
-        <h2>Admin Dashboard</h2>
+      {/* Top Portal Banner */}
+      <div className="admin-portal-nav">
+        <div className="portal-info">
+          <div className="portal-logo">DS</div>
+          <div className="portal-text">
+            <span className="portal-label">ADMIN PORTAL</span>
+            <h1 className="portal-title">Digiotai Solutions</h1>
+          </div>
+        </div>
+        <div className="portal-tabs">
+          <button 
+            className={`portal-tab ${activeTab === 'Dashboard' ? 'active' : ''}`}
+            onClick={() => setActiveTab('Dashboard')}
+          >
+            Dashboard
+          </button>
+          <button 
+            className={`portal-tab ${activeTab === 'Reports' ? 'active' : ''}`}
+            onClick={() => setActiveTab('Reports')}
+          >
+            Reports
+          </button>
+        </div>
       </div>
 
-      {error && <div className="error-message">{error}</div>}
+      <div className="dashboard-content">
+        {activeTab === 'Dashboard' ? (
+          <>
+            <div className="dashboard-main-header">
+              <h2 className="page-title">Admin Dashboard</h2>
+              <div className="stats-row">
+                <div className="stat-pill stats-total">
+                  Total: {stats.total} submissions
+                </div>
+                <div className="stat-pill stats-pending">
+                  {stats.pending} pending approvals
+                </div>
+              </div>
+            </div>
 
-      {submissions.length === 0 && !loading ? (
-        <div className="info-banner">
-          👋 Currently, there are no timesheets awaiting review.
-        </div>
-      ) : (
-        <div className="submissions-list">
-          <h3>Pending Approvals ({submissions.length})</h3>
-          
-          {submissions.map((sub) => {
-            const id = `${sub.email}_${sub.week_start_date}`;
-            const isExpanded = expandedId === id;
+        {error && <div className="error-message">{error}</div>}
+
+        {submissions.length === 0 && !loading ? (
+          <div className="info-banner">
+            👋 Currently, there are no timesheets awaiting review.
+          </div>
+        ) : (
+          <div className="submissions-list-container">
+            <div className="list-header">
+              <h3 className="list-title">Pending Approvals</h3>
+              <span className="count-bubble">{submissions.length}</span>
+            </div>
             
-            return (
-              <div key={id} className={`submission-item card ${isExpanded ? 'expanded' : ''}`}>
-                <div className="submission-summary" onClick={() => toggleExpand(sub)}>
-                  <div className="sub-main-info">
-                    <div className="avatar-circle">
-                      {getInitials(sub.name)}
-                    </div>
-                    <div className="sub-identity">
-                      <h4>{sub.name}</h4>
-                      <span className="sub-id-badge">ID: {sub.employee_id}</span>
-                    </div>
-                    <div className="sub-divider"></div>
-                    <div className="sub-meta-group">
-                      <span className="meta-label">SUBMISSION PERIOD</span>
-                      <div className="meta-value">
-                        <Calendar size={14} className="meta-icon" />
-                        <span>{sub.week_start_date}</span>
+            <div className="submissions-stack">
+              {submissions.map((sub) => {
+                const id = `${sub.email}_${sub.week_start_date}`;
+                const isExpanded = expandedId === id;
+                
+                return (
+                  <div key={id} className={`submission-card ${isExpanded ? 'active' : ''}`}>
+                    <div className="card-summary" onClick={() => toggleExpand(sub)}>
+                      <div className="card-main-info">
+                        <div className="card-avatar">
+                          {getInitials(sub.name)}
+                        </div>
+                        <div className="card-identity">
+                          <h4 className="card-name">{sub.name}</h4>
+                          <span className="card-id">ID: {sub.employee_id}</span>
+                        </div>
+                      </div>
+
+                      <div className="card-meta">
+                        <div className="meta-group">
+                          <span className="meta-label">SUBMISSION PERIOD</span>
+                          <div className="meta-date">
+                            <Calendar size={16} />
+                            <span>{sub.week_start_date}</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="card-action-icon">
+                        {isExpanded ? <ChevronDown size={22} /> : <ChevronRight size={22} />}
                       </div>
                     </div>
-                  </div>
-                  <div className="expand-icon">
-                    {isExpanded ? <ChevronDown size={20} /> : <ChevronRight size={20} />}
-                  </div>
-                </div>
 
                 {isExpanded && (
                   <div className="submission-details">
@@ -194,7 +247,13 @@ export const AdminDashboard = () => {
             );
           })}
         </div>
-      )}
+      </div>
+    )}
+          </>
+        ) : (
+          <AdminReports />
+        )}
+      </div>
       {/* Approve Confirmation Modal */}
       {approveModal && (
         <div className="modal-overlay">

@@ -6,7 +6,6 @@ from app.models.models import WorkType
 class TimesheetEntryBase(BaseModel):
     date: date_type
     hours: float = Field(..., ge=0, le=8)
-    project_name: Optional[str] = "Default Project" # Placeholder until we have project management
     task_description: str
     work_type: WorkType
 
@@ -30,7 +29,6 @@ class TimesheetResponse(BaseModel):
     date: date_type
     hours: float
     task_description: str
-    project_name: str
     work_type: WorkType
     status: str
     rejection_reason: Optional[str] = None

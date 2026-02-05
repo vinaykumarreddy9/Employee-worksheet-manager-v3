@@ -25,7 +25,6 @@ class PendingTimesheet(Base):
     week_start_date = Column(Date, nullable=False)
     date = Column(Date, nullable=False)
     hours = Column(Float, nullable=False)
-    project_name = Column(String, nullable=False)
     task_description = Column(String, nullable=False)
     status = Column(String, default="Pending")
     rejection_reason = Column(String, nullable=True) # Feedback from admin
